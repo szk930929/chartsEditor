@@ -6,18 +6,56 @@
             <b>chartsEditor</b>
           </div>
         </Header>
-        <Content></Content>
+        <Content>
+          <Row>
+              <Col span="17">
+                <chartsPanel :chartsOptions="option"></chartsPanel>
+              </Col>
+              <Col span="7">
+                <div class="right_tools-block">
+                  <div>
+                    <Form :label-width="80">
+                      <FormItem label="图表标题">
+                          <Input v-model="title" placeholder="输入标题" />
+                      </FormItem>
+                    </Form>
+                  </div>
+                  <Divider />
+                </div>
+              </Col>
+          </Row>
+        </Content>
         <Footer>Footer</Footer>
     </Layout>
 </template>
 <script>
+import {getChartsObject} from './../../static/security/index.js'
 export default {
   name: 'chartsEditor',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      option:{
+          xAxis: {
+              type: 'category',
+              data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          },
+          yAxis: {
+              type: 'value'
+          },
+          series: [{
+              data: [820, 932, 901, 934, 1290, 1330, 1320],
+              type: 'line'
+          }]
+      },
+      title:'',
     }
-  }
+  },
+  created() {
+    this.option = getChartsObject('line');
+  },
+  components: {
+			'chartsPanel':resolve => {require(['./chartsTools/chartsPanel.vue'], resolve)},
+	}
 }
 </script>
 <style scoped>
@@ -31,5 +69,12 @@ export default {
       font-size: 30px;
       vertical-align: middle;
       margin-left: 30px;
+    }
+    .right_tools-block{
+      width: 100%;
+      padding: 10px;
+    }
+    .right_tools-block .tools-item{
+        width: 100%;
     }
 </style>
