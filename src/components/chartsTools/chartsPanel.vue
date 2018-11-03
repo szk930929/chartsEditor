@@ -8,7 +8,6 @@ export default {
   data () {
     return {
       chart: {},
-      option:this.props.chartsOptions,
     }
   },
   computed:{
@@ -20,7 +19,7 @@ export default {
       optionClone:{
           handler(newValue, oldValue) {
                 let _this = this
-                this.myChart.setOption(this.optionClone,true);
+                this.chart.setOption(this.optionClone,true);
     　　　　},
     　　　　deep: true
       },

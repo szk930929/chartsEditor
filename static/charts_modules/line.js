@@ -28,7 +28,7 @@ var LineChart = (function () {
 						}
 					},
 					splitLine:{
-						show:true,
+						show:false,
 						lineStyle:{
 							color:'#333',
 							width:1,
@@ -53,7 +53,7 @@ var LineChart = (function () {
 						}
 					},
 					splitLine:{
-						show:true,
+						show:false,
 						lineStyle:{
 							color:'#333',
 							width:1,
@@ -61,7 +61,12 @@ var LineChart = (function () {
 						}
 					},
 				}],
+				toolTip:{
+					show:true,
+					trigger: 'axis'
+				},
 				series: [{
+					name: '数据1',
 					data: [820, 932, 901, 934, 1290, 1330, 1320],
 					type: 'line'
 				}],

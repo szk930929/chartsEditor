@@ -16,7 +16,7 @@
                   <div>
                     <Form :label-width="80">
                       <FormItem label="图表标题">
-                          <Input v-model="title" placeholder="输入标题" />
+                          <Input v-model="option.title.text" placeholder="输入标题" />
                       </FormItem>
                     </Form>
                   </div>
@@ -35,23 +35,76 @@ export default {
   data () {
     return {
       option:{
-          xAxis: {
-              type: 'category',
-              data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-          },
-          yAxis: {
-              type: 'value'
-          },
-          series: [{
-              data: [820, 932, 901, 934, 1290, 1330, 1320],
-              type: 'line'
-          }]
+          title:{
+					show:true,
+					text:'',
+				},
+				legend:{
+					show:true,
+					align:'auto',
+				},
+				xAxis: {
+					type: 'category',
+					show: false,
+					name:'',
+					nameTextStyle:{
+						color:'#333',
+						fontStyle:'normal',
+						fontSize:12,
+						align:'center',
+					},
+					axisLine:{
+						lineStyle:{
+							color:'#333',
+							width:1,
+							type:'sold',
+						}
+					},
+					splitLine:{
+						show:false,
+						lineStyle:{
+							color:'#333',
+							width:1,
+							type:'sold',
+						}
+					},
+					data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+				},
+				yAxis: [{
+					type: 'value',
+					nameTextStyle:{
+						color:'#333',
+						fontStyle:'normal',
+						fontSize:12,
+						align:'center',
+					},
+					axisLine:{
+						lineStyle:{
+							color:'#333',
+							width:1,
+							type:'sold',
+						}
+					},
+					splitLine:{
+						show:true,
+						lineStyle:{
+							color:'#333',
+							width:1,
+							type:'sold',
+						}
+					},
+				}],
+				series: [{
+					data: [820, 932, 901, 934, 1290, 1330, 1320],
+					type: 'line'
+				}],
+				colors: ['#5182E4', '#9BCC66', '#3FB27E', '#F7CB4A', '#F88D48', '#F35352', '#CE62D6', '#8954D4', '#5156B8', '#51B4F1', '#69D4DB', '#D42D6B']
       },
       title:'',
     }
   },
   created() {
-    this.option = getChartsObject('line');
+    this.option = getChartsObject('line').getDefaultOpt();
   },
   components: {
 			'chartsPanel':resolve => {require(['./chartsTools/chartsPanel.vue'], resolve)},
