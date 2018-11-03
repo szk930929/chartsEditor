@@ -8,7 +8,7 @@ var LineChart = (function () {
 				},
 				legend:{
 					show:true,
-					align:'auto',
+					top:10,
 				},
 				xAxis: {
 					type: 'category',

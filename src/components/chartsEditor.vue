@@ -4,6 +4,7 @@
           <div class="block_head">
             <Icon type="logo-freebsd-devil" size='60' color='#fff' />
             <b>chartsEditor</b>
+            <Button style="float:right;margin-top:15px" @click="showCode = true" type="primary">查看代码</Button>
           </div>
         </Header>
         <Content>
@@ -18,14 +19,17 @@
                       <FormItem label="图表标题">
                           <Input v-model="option.title.text" placeholder="输入标题" />
                       </FormItem>
+                      <Divider />
                     </Form>
                   </div>
-                  <Divider />
                 </div>
               </Col>
           </Row>
         </Content>
         <Footer>Footer</Footer>
+        <Drawer title="Code" placement="left" :closable="false" v-model="showCode" :width="30">
+            <p>{{option}}</p>
+        </Drawer>
     </Layout>
 </template>
 <script>
@@ -34,6 +38,7 @@ export default {
   name: 'chartsEditor',
   data () {
     return {
+      showCode:false,
       option:{
           title:{
 					show:true,
@@ -102,6 +107,9 @@ export default {
       },
       title:'',
     }
+  },
+  methods:{
+    
   },
   created() {
     this.option = getChartsObject('line').getDefaultOpt();
