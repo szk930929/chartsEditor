@@ -23,6 +23,13 @@ export default {
     　　　　},
     　　　　deep: true
       },
+      chartsOptions:{
+           handler(newValue, oldValue) {
+                let _this = this
+                this.chart.setOption(this.chartsOptions,true);
+    　　　　},
+    　　　　deep: true
+      }
   },
   mounted() {
         this.chart = this.$echarts.init(this.$refs.charts);

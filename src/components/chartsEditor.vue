@@ -19,7 +19,14 @@
                       <FormItem label="图表标题">
                           <Input v-model="option.title.text" placeholder="输入标题" />
                       </FormItem>
-                      <Divider />
+                      <FormItem label="图例设置">
+                          <RadioGroup v-model="legendAlign" @on-change="legendAlignChange" type="button" size="small">
+                              <Radio label="left">居左</Radio>
+                              <Radio label="center">居中</Radio>
+                              <Radio label="right">居右</Radio>
+                              <Radio label="none">不显示</Radio>
+                          </RadioGroup>
+                      </FormItem>
                     </Form>
                   </div>
                 </div>
@@ -39,6 +46,7 @@ export default {
   data () {
     return {
       showCode:false,
+      legendAlign:'center',
       option:{
           title:{
 					show:true,
@@ -46,7 +54,9 @@ export default {
 				},
 				legend:{
 					show:true,
-					align:'auto',
+          left:'center',
+          top:'top',
+          orient:'horizontal',
 				},
 				xAxis: {
 					type: 'category',
@@ -109,7 +119,34 @@ export default {
     }
   },
   methods:{
-    
+    legendAlignChange(value) {
+      const _this = this;
+      switch (value) {
+        case 'none':
+          _this.option.legend.show = false;
+          break;
+        case 'left':
+          _this.option.legend.show = true;
+          _this.option.legend.left = 'left';
+          _this.option.legend.top = 'middle';
+          _this.option.legend.orient = 'vertical';
+          break;
+        case 'right':
+          _this.option.legend.show = true;
+          _this.option.legend.left = 'right';
+          _this.option.legend.top = 'middle';
+          _this.option.legend.orient = 'vertical';
+          break;
+        case 'center':
+          _this.option.legend.show = true;
+          _this.option.legend.left = 'center';
+          _this.option.legend.top = 'top';
+          _this.option.legend.orient = 'horizontal';
+          break;
+        default:
+          break;
+      }
+    }
   },
   created() {
     this.option = getChartsObject('line').getDefaultOpt();
